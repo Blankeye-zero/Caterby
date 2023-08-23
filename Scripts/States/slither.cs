@@ -2,21 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class slither : moving
+public class Slither : Moving
 {
-    //private MovementSM _sm;
     private float _horizontalInput;
 
-    public slither(MovementSM stateMachine) : base("Slither", stateMachine)
+    public Slither(MovementSM stateMachine) : base("Slither", stateMachine)
     {
-        //_sm = (MovementSM)stateMachine;
     }
-
-    //public override void Enter()
-    //{
-    //    base.Enter();
-    //    _horizontalInput = 0f;
-    //}
 
     public override void UpdateLogic()
     {
@@ -29,14 +21,20 @@ public class slither : moving
     public override void UpdatePhysics()
     {
         base.UpdatePhysics();
-        Vector2 vel = _sm.rigidbody.velocity;
+        Vector2 vel = _sm.xrigidbody.velocity;
         vel.x = _horizontalInput * _sm.speed;
         if (vel.x < 0)
-            _sm.renderer.flipX = true;
+            if (_sm.xrenderer.name.Contains("mantis"))
+                _sm.xrenderer.flipX = false;
+            else
+                _sm.xrenderer.flipX = true;
         else
-            _sm.renderer.flipX = false;
-        _sm.rigidbody.velocity = vel;
-        if (_sm.renderer.name == "mantisv10")
+            if (_sm.xrenderer.name.Contains("mantis"))
+            _sm.xrenderer.flipX = true;
+        else
+            _sm.xrenderer.flipX = false;
+        _sm.xrigidbody.velocity = vel;
+        if (_sm.xrenderer.name.Contains("mantis"))
             _sm.animator.Play("Mantis-Run");
         else
             _sm.animator.Play("Slither");
