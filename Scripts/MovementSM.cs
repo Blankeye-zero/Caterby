@@ -5,16 +5,16 @@ using UnityEngine;
 public class MovementSM : StateMachine
 {
     [HideInInspector]
-    public idle IdleState;
+    public Idle IdleState;
     //[HideInInspector]
     //public moving MovingState;
     [HideInInspector]
-    public slither SlitherState;
+    public Slither SlitherState;
     [HideInInspector]
-    public rolling RollingState;
+    public Rolling RollingState;
 
-    public Rigidbody2D rigidbody;
-    public SpriteRenderer renderer;
+    public Rigidbody2D xrigidbody;
+    public SpriteRenderer xrenderer;
     public Animator animator;
    
     //public Transform transformController;
@@ -24,9 +24,9 @@ public class MovementSM : StateMachine
 
     private void Awake()
     {
-        IdleState = new idle(this);
-        SlitherState = new slither(this);
-        RollingState = new rolling(this);
+        IdleState = new Idle(this);
+        SlitherState = new Slither(this);
+        RollingState = new Rolling(this);
     }
 
     protected override BaseState GetInitialState()

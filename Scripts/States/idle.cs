@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class idle : BaseState
+public class Idle : BaseState
 {
     private float _horizontalInput;
 
     private MovementSM _sm;
-    public idle(MovementSM stateMachine) : base("Idle", stateMachine) {
+    public Idle(MovementSM stateMachine) : base("Idle", stateMachine) {
         //if (transformController.localRotation.z < 0)
         //{
         //    transformController.localRotation = new Quaternion(0, 0, 0, 0);
@@ -32,8 +32,9 @@ public class idle : BaseState
     public override void UpdatePhysics()
     {
         base.UpdatePhysics();
-        if (_sm.renderer.name == "mantisv10")
+        if (_sm.xrenderer.name.Contains("mantis")) {
             _sm.animator.Play("Mantis-Idle");
+        }
         else
         _sm.animator.Play("Idle");
     }
